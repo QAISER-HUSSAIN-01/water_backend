@@ -21,7 +21,7 @@ mongoose.connect(process.env.DB, {
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({origin:'*'}));
 app.use(express.json());
 app.use('/api',authRoutes);
 app.use('/api/user',userRoutes);
