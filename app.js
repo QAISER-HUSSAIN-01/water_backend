@@ -15,6 +15,11 @@ mongoose.connect(process.env.DB, {
 })
   .then(() => {
     console.log('Connected to MongoDB');
+    // Start the server
+    const PORT = process.env.PORT || 9000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   })
   .catch((error) => {
     console.error('Error connecting to MongoDB', error);
@@ -27,17 +32,10 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
 
-// Routes
-// Define your routes here
-
-// Start the server
-const PORT = process.env.PORT || 9000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
