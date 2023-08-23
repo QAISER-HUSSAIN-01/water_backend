@@ -24,7 +24,6 @@ router.get('/:id', verifyToken, async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Could not found' });
     }
-    res.status(200).json({ message: 'Access granted' });
 });
 
 router.post('/', verifyToken, async (req, res) => {
@@ -39,35 +38,35 @@ router.post('/', verifyToken, async (req, res) => {
             bottles
         });
         await created.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'Registered Successfully' });
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Registration failed' });
+        res.status(500).json({ error: 'Registration Failed' });
     }
 });
 
 router.put('/:id', verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
-        await User.findByIdAndUpdate(id, req.body, { new: true });
-        res.status(200).json({ message: 'User updated successfully' });
+        let updated = await User.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json({ message: 'Updated Successfully'});
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Updation failed' });
+        res.status(500).json({ error: 'Updation Failed' });
     }
 });
 
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
-        await User.findByIdAndDelete(id);
-        res.status(200).json({ message: 'User deleted successfully' });
+        let deleted = await User.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Deleted Successfully'});
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Deletion failed' });
+        res.status(500).json({ error: 'Deletion Failed' });
     }
 });
 
