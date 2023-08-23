@@ -29,7 +29,7 @@ mongoose.connect(process.env.DB, {
 
 // Middleware
 app.use(cors({
-  origin: 'https://water-managment.netlify.app',
+  origin: ['https://water-managment.netlify.app','http://localhost:3001','http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
