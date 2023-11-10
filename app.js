@@ -38,7 +38,7 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-app.use(express.static('build'));
+app.use(express.static('static'));
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
