@@ -29,7 +29,7 @@ mongoose.connect(process.env.DB, {
 
 // Middleware
 app.use(cors({
-  origin: ['https://water-managment.netlify.app','http://localhost:3001','http://localhost:3000'],
+  origin: ['https://water-managment.netlify.app','http://localhost:3001','http://localhost:3000','http://localhost:8000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
@@ -38,7 +38,7 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-
+app.use(express.static('static'));
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
