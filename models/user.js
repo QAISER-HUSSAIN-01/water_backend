@@ -8,7 +8,9 @@ const userSchema = new Schema({
   phone: String,
   address: String,
   bottles: String,
-  balance:String
+  balance:String,
+  remainingAmount:String,
+  recievedAmount:String
 });
 
 const User = mongoose.model('User', userSchema);
