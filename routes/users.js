@@ -38,7 +38,8 @@ router.post('/', verifyToken, async (req, res) => {
             bottles
         });
         await created.save();
-        res.status(201).json({ message: 'Registered Successfully' });
+        const users = await User.find();
+        res.status(201).json({ message: 'Registered Successfully',data:users });
     }
     catch (error) {
         console.error(error);

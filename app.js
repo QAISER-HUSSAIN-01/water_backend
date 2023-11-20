@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -6,6 +7,11 @@ import userRoutes from './routes/users.js';
 import authRoutes from './routes/auth.js';
 import dashboardRoutes from './routes/dashboard.js';
 const app = express();
+
+// app.use(express.static('static'));
+// app.get('*',(req,res)=>{
+//   res.sendFile(path.join(__dirname,'static','index.html'));
+// });
 
 dotenv.config();
 // Connect to MongoDB using Mongoose
@@ -17,7 +23,7 @@ mongoose.connect(process.env.DB, {
   .then(() => {
     console.log('Connected to MongoDB');
     // Start the server
-    const PORT = process.env.PORT || 9000;
+    const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
       
@@ -38,7 +44,6 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-app.use(express.static('static'));
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
