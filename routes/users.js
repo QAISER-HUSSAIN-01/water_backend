@@ -3,6 +3,18 @@ const router = express.Router();
 import verifyToken from '../middleware/protected.js';
 import User from '../models/user.js';
 
+
+router.get('/list', verifyToken, async (req, res) => {
+    // This route is protected and only accessible with a valid token.
+    // You can access the user data from req.userData.
+    try {
+        const data = await User.find({},'username _id');
+        res.status(200).json({ data: data });
+    } catch (error) {
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+});
+
 router.get('/', verifyToken, async (req, res) => {
     // This route is protected and only accessible with a valid token.
     // You can access the user data from req.userData.
@@ -51,7 +63,8 @@ router.put('/:id', verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
         let updated = await User.findByIdAndUpdate(id, req.body, { new: true });
-        res.status(200).json({ message: 'Updated Successfully'});
+        const users = await User.find();
+        res.status(200).json({ message: 'Updated Successfully', data:users});
     }
     catch (error) {
         console.error(error);
@@ -63,7 +76,8 @@ router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
         let deleted = await User.findByIdAndDelete(id);
-        res.status(200).json({ message: 'Deleted Successfully'});
+        const users = await User.find();
+        res.status(200).json({ message: 'Deleted Successfully',data:users});
     }
     catch (error) {
         console.error(error);
