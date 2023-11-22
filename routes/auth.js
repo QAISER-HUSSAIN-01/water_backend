@@ -31,13 +31,13 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(401).json({ error: 'Authentication Failed' });
+      return res.status(401).json({ error: 'No User Found' });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ error: 'Authentication Failed' });
+      return res.status(401).json({ error: 'Password Incorrect' });
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.SECRET, {

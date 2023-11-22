@@ -3,7 +3,7 @@ const router = express.Router();
 import verifyToken from '../middleware/protected.js';
 import User from '../models/user.js';
 
-router.get('/', verifyToken, async (req, res) => {
+router.get('/', async (req, res) => {
     // This route is protected and only accessible with a valid token.
     // You can access the user data from req.userData.
     try {
