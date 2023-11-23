@@ -1,19 +1,20 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 function verifyToken(req, res, next) {
   const token = req.headers.authorization;
 
-  console.log('token',token);
   if (!token) {
-    return res.status(401).json({ error: 'Authentication failed' });
+    console.log("token ====>>>>", token);
+    return res.status(401).json({ error: "Authentication failed" });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
+    console.log("decoded ===>>>>  ", decoded);
     req.userData = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ error: 'Authentication failed' });
+    return res.status(401).json({ error: "Authentication failed" });
   }
 }
 

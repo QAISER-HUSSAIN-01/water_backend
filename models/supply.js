@@ -3,13 +3,9 @@ const Schema = mongoose.Schema;
 
 const sppplySchema = new Schema({
   userId:mongoose.Schema.Types.ObjectId,
-  name: String,
+  customerId:mongoose.Schema.Types.ObjectId,
   bottlesIn: String,
   bottlesOut: String,
-  address: String,
-  phone: String,
-  bottles: String,
-  balance:String,
   remainingAmount:String,
   recievedAmount:String
 });

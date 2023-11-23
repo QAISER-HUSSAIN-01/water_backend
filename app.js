@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from './routes/users.js';
 import authRoutes from './routes/auth.js';
+import supplyRoutes from './routes/supply.js';
 import dashboardRoutes from './routes/dashboard.js';
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(express.json());
 
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/supply', supplyRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
 process.on('unhandledRejection', (reason, promise) => {
